@@ -3,7 +3,7 @@
     <head>
         <title>Инженерный проект</title>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+        <link rel="stylesheet" href="materialize\css\materialize.min.css">
         <link rel="stylesheet" href="style.css">
         <meta charset="UTF-8">
     </head>
@@ -68,12 +68,34 @@
                 // устанавливаемсортировкупоумолчанию// формируемконтентстраницыспомощьюфункцииивыводимего
                 echo getFriendsList($_GET['sort'], $_GET['pg']);
             ?>
+
+           <h2>Форма обратной связи</h2>
+           <hr>
+           <div class="form">
+               <div class="form__image_left">
+                   <img src="image\yoga.jpg" alt="">
+               </div>
+               <div class="form__content">
+               <legend>Контактная информация</legend>
+               <input class ="form__enter" type="text" required placeholder="Ваше имя">
+               <input type="text" required placeholder="Ваше фамилия">
+               <input type="date" required name="date" id="date" placeholder="Дата рождения">
+               <input type="text" required name="phone" id="phone" placeholder="Телефон">
+               <input type="email" required placeholder="Ваша электронная почта">
+               <button class="form__button" type="submit" name="button" value="Отправить заявку">Отправить заявку</button>
+               </div>
+           </div>
         </div>
         
     </div> 
        
    
-   <footer>
+   <footer class="page-footer">
+   <div class="footer-copyright">
+            <div class="container">
+                <p>© 2014 Центр йоги "Эйфория"</p>
+            </div>
+          </div>
   </footer>
 
 
