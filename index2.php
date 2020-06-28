@@ -121,7 +121,28 @@
                     echo '</pre>';
                 }
             ?>
-                
+                <h2 class="reviews__title">Добавьте отзыв</h2>
+                <hr>
+                <div class="reviews__review">
+                    <form class="form" action="reviews.php" method="POST">
+                       <input  name="id" value="<?php echo $id; ?>" type="hidden">
+                       <input class ="form__enter" name="name" value="<?php echo $name; ?>" type="text"  placeholder="Ваше имя">
+                       <input type="email" name="email" value="<?php echo $email; ?>"  placeholder="Ваша электронная почта">
+                       <input class ="form__enter" name="title" value="<?php echo $title; ?>" type="text"  placeholder="Тема">
+                       <input  name="description" value="<?php echo $desc; ?>" type="text"  placeholder="Сообщение">
+                       <?php
+                           if ($update == true) :
+                       ?>
+                          <button class="form__button" name="update" value="update" type="submit">Редактировать!</button>
+                      <?php
+                        else :
+                      ?>
+                         <button class="form__button" name="save" value="добавить" type="submit">Добавить!</button>
+                      <?php
+                        endif;
+                      ?>
+                   </form>
+                </div>
                 
         </div>
     </div>
