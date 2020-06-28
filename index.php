@@ -4,7 +4,7 @@
         <title>Инженерный проект</title>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="materialize\css\materialize.min.css">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="style\style.css">
         <meta charset="UTF-8">
     </head>
     <body>
@@ -17,15 +17,15 @@
                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons"></i></a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="#" class="selected">Главная</a></li>
-                    <li><a href="#">Направления</a></li>
-                    <li><a href="#">О нас</a></li>
-                    <li><a href="#">Отзывы</a></li>
+                    <li><a href="index3.php">Наши иснтрукторы</a></li>
+                    <li><a href="index5.php">О нас</a></li>
+                    <li><a href="index2.php">Отзывы</a></li>
                 </ul>
                 <ul class="side-nav" id="mobile-demo">
                     <li><a href="#">Главная</a></li>
-                    <li><a href="#">Направления</a></li>
-                    <li><a href="#">О нас</a></li>
-                    <li><a href="#">Отзывы</a></li>
+                    <li><a href="index3.php">Наши инструкторы</a></li>
+                    <li><a href="index5.php">О нас</a></li>
+                    <li><a href="index2.php">Отзывы</a></li>
                 </ul>
             </div>
             </div>
@@ -58,32 +58,49 @@
         <h2>Популярные занятия</h2>
         <p class="container__subtitle">Формирование здоровых привычек</p>
         <div class="container__content">
+           <div class="container__block">
             <?php
-                include 'vie.php';
-                // подключаеммодульсбиблиотекойфункций
-                // есливпараметрахнеуказанатекущаястраница – выводимсамуюпервую
-                if( !isset($_GET['pg']) || $_GET['pg']<0 ) $_GET['pg']=0;
-                // есливпараметрахнеуказантипсортировкиилионнедопустим
-                if(!isset($_GET['sort']) || ($_GET['sort']!='byid' && $_GET['sort']!='fam' && $_GET['sort']!='birth')) $_GET['sort']='byid';
-                // устанавливаемсортировкупоумолчанию// формируемконтентстраницыспомощьюфункцииивыводимего
-                echo getFriendsList($_GET['sort'], $_GET['pg']);
+                $mysqli = new mysqli('std-mysql', 'std_942', 'Ns120765003', 'std_942') or die(mysqli_error($mysqli));
+                $result = $mysqli->query("SELECT project.title, project.description, project.image,
+                project.quantity, project.id_teacher, teacher.name_teacher FROM project, teacher WHERE project.id_teacher=teacher.id_teacher") or die($mysqli->error);
             ?>
+            <?php
+                while ($row = $result->fetch_assoc()):
 
+            ?>
+           
+                <div class="block"><h4 class="block__title"><br><?php echo $row['title'] ?></h4>
+                   <p class="block__description"> <b>Описание:</b><br><?php echo $row['description'] ?></p>
+                   <div class="block__image"><img src="image<?php echo $row['image'] ?>"></div>
+                   <div class="block__teacher"><b>Количество занятий в неделю:</b><br><?php echo $row['quantity'] ?></div>
+                   <div class="block__quantity"><b>Преподаватель:</b><br><?php echo $row['name_teacher'] ?></div>
+                   <div class="block__link"><a href="index3.php">Подробнее</a></div>
+                </div>
+            
+            <?php endwhile; ?>
+            <?php 
+                function pre_r( $array ) {
+                    echo '<pre>';
+                    print_r( $array );
+                    echo '</pre>';
+                }
+            ?>
+            </div>
            <h2>Форма обратной связи</h2>
            <hr>
            <div class="form">
                <div class="form__image_left">
                    <img src="image\yoga.jpg" alt="">
                </div>
-               <div class="form__content">
-               <legend>Контактная информация</legend>
-               <input class ="form__enter" type="text" required placeholder="Ваше имя">
-               <input type="text" required placeholder="Ваше фамилия">
-               <input type="date" required name="date" id="date" placeholder="Дата рождения">
-               <input type="text" required name="phone" id="phone" placeholder="Телефон">
-               <input type="email" required placeholder="Ваша электронная почта">
-               <button class="form__button" type="submit" name="button" value="Отправить заявку">Отправить заявку</button>
-               </div>
+               <form class="form__content" action="mail.php" method="POST">
+                   <legend>Контактная информация</legend>
+                   <input class ="form__enter" type="text" name="name" required placeholder="Ваше имя">
+                   <input type="text" name="surname" required placeholder="Ваше фамилия">
+                   <input type="date" required name="date" id="date" placeholder="Дата рождения">
+                   <input type="text" required name="phone" id="phone" placeholder="Телефон">
+                   <input type="email" name="email" required placeholder="Ваша электронная почта">
+                   <button class="form__button" type="submit" name="button" value="Отправить заявку">Отправить заявку</button>
+               </form>
            </div>
         </div>
         
