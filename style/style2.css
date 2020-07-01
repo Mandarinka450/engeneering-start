@@ -65,7 +65,10 @@ form> button{
     box-shadow: 0 0 15px rgba(122,122,122,0.5);
     padding: 10px;
     width: 100%;
-    border: 1px solid black;
+    border-top: 2px solid #850505;
+    border-right: 2px  solid #eb770b;
+    border-bottom: 2px solid #fcf80d;
+    border-left: 2px solid #00b7ff;
 }
 .review{
     display: flex;
@@ -101,3 +104,35 @@ form> button{
 .parallax-container{
     margin-bottom: 50px;
 }
+.reviews__message{
+    width: 70%;
+    margin: 20px auto;
+    background-color: rgba(20, 184, 124, 0.8);
+    text-align: center;
+    color: white;
+    font-size: 23px;
+    height: 75px;
+    font-weight: bolder;
+    opacity: 0.7;
+    padding-top: 2px;
+    border: 2px solid rgba(0, 255, 4, 1);
+    border-radius: 2%;
+}
+
+@media (max-width:988px) {
+    .footer-copyright  p{
+        font-size: 32px;
+    }
+    .form > input{
+        font-size: 30px;
+        height: 5rem;
+    }
+    .form > button{
+        font-size: 27px;
+        height: 70px;
+    }
+    .review p, .review a{
+        font-size: 18px;
+    }
+}
+
