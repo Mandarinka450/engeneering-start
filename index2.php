@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 
     <head>
         <title>Инженерный проект</title>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="materialize\css\materialize.min.css">
-        <link rel="stylesheet" href="style\style2.css">
+        <link rel="stylesheet" href="materialize/css/materialize.min.css">
+        <link rel="stylesheet" href="style/style2.css">
         <meta charset="UTF-8">
     </head>
     <body>
@@ -15,7 +15,7 @@
             <div class="nav-wrapper">
                 <div class="container">
                 <a href="#" class="brand-logo">Центр йоги "Эйфория"</a>
-                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons"></i></a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="index.php" >Главная</a></li>
                     <li><a href="index3.php">Наши инструкторы</a></li>
@@ -36,9 +36,9 @@
     <main>
     <div class="full-width">
         <div class="carousel carousel-slider">
-            <a href="#one!" class="carousel-item"><img src="image\3.jpg" alt=""></a>
-            <a href="#two!" class="carousel-item"><img src="image\2.jpg" alt=""></a>
-            <a href="#three!" class="carousel-item"><img src="image\1.jpg" alt=""></a>
+            <a href="#one!" class="carousel-item"><img src="image/3.jpg" alt=""></a>
+            <a href="#two!" class="carousel-item"><img src="image/2.jpg" alt=""></a>
+            <a href="#three!" class="carousel-item"><img src="image/1.jpg" alt=""></a>
         </div>
     </div>
     </main>
@@ -54,7 +54,7 @@
                    <div class="review">
                         <div class="review__content">
                             <h4 class="review__name">Darymin</h4>
-                            <img class="review__image" src="image\gomer.png" alt="">
+                            <img class="review__image" src="image/gomer.png" alt="">
                             <p class="review__mail"><b>efma@gmail.com</b></p>
 
                         </div>
@@ -69,7 +69,7 @@
                    <div class="review">
                         <div class="review__content">
                             <h4 class="review__name">Lisa_mur_mur</h4>
-                            <img class="review__image" src="image\monro.jpg" alt="">
+                            <img class="review__image" src="image/monro.jpg" alt="">
                             <p class="review__mail"><b>mur-mur@mail.ru</b></p>
 
                         </div>
@@ -98,7 +98,7 @@
                     <div class="review">
                         <div class="review__content">
                             <h4 class="review__name"><?php echo $row['name']; ?></h4>
-                            <img class="review__image" src="image\user.png" alt="">
+                            <img class="review__image" src="image/user.png" alt="">
                             <p class="review__mail"><b><?php echo $row['email']; ?></b></p>
 
                         </div>
@@ -123,12 +123,22 @@
             ?>
                 <h2 class="reviews__title">Добавьте отзыв</h2>
                 <hr>
+                <?php if (isset($_SESSION['message'])):?>
+                    <div class="reviews__message">
+                        <p>
+                        <?php 
+                            echo $_SESSION['message'];
+                            unset($_SESSION['message']);
+                        ?>
+                       </p>
+                </div>
+                <?php endif; ?>
                 <div class="reviews__review">
                     <form class="form" action="reviews.php" method="POST">
                        <input  name="id" value="<?php echo $id; ?>" type="hidden">
-                       <input class ="form__enter" name="name" value="<?php echo $name; ?>" type="text"  placeholder="Ваше имя">
-                       <input type="email" name="email" value="<?php echo $email; ?>"  placeholder="Ваша электронная почта">
-                       <input class ="form__enter" name="title" value="<?php echo $title; ?>" type="text"  placeholder="Тема">
+                       <input class ="form__enter" reqiured name="name" value="<?php echo $name; ?>" type="text"  placeholder="Ваше имя">
+                       <input type="email" name="email" required value="<?php echo $email; ?>"  placeholder="Ваша электронная почта">
+                       <input class ="form__enter" name="title" required value="<?php echo $title; ?>" type="text"  placeholder="Тема">
                        <input  name="description" value="<?php echo $desc; ?>" type="text"  placeholder="Сообщение">
                        <?php
                            if ($update == true) :
@@ -152,10 +162,13 @@
         </div>
     </div>   
    
-   <footer class="page-footer">
+ <footer class="page-footer">
     <div class="footer-copyright">
         <div class="container">
-            <p>© 2014 Центр йоги "Эйфория"</p>
+            <div class="container__center">
+               <p>© 2014 Центр йоги "Эйфория"</p>
+            </div>
+            <p>Все права защищены</p>
         </div>
     </div>
   </footer>
@@ -183,6 +196,15 @@
     
             });
         });
+    </script>
+    <script>
+        function delete(id){
+        var feedback = document.getElementById(id);
+        var form = '<form class="clearfix" name="form_add" method="post" action="moduls/delete.php"><p>Вы действительно хотите удалить этот отзыв?</p><input type="button" name="button-close" class="btn btn-outline-light float-right" style="width:10vw;" value="Нет" onclick="location.reload()"><input type="submit" name="button-delete" style="width:10vw;" class="btn btn-danger float-right" value="Да"> <input type="hidden" name="id" value="'+id+'"></form>';
+        feedback.innerHTML = form;
+    }
+
+    
     </script>   
     </body>
 </html>
